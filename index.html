@@ -1,26 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <title>Document</title>
-    <script src="d3.v7.js"></script>
-    <style>
-      svg {
-        border: 3px solid black;
-      }
-    </style>
-  </head>
-  <body>
-    <h1>Dashboard for music nerds 🤓</h1>
-    <h2>Ratings for the albums</h2>
 
-    <p>Tryk på knappen for at sortere</p>
-    <div>
-      <button id="sortByValue">Efter højeste måleresultat</button>
-      <button id="sortByDate">Efter dato</button>
-      <button id="sortByMeasureTime">Efter hurtigste måletid</button>
-    </div>
+<head>
+  <meta charset="UTF-8" />
+  <title>Document</title>
+  <script src="d3.v7.js"></script>
+  <style>
+    svg {
+      border: 3px solid black;
+    }
+  </style>
+</head>
 
-    <script src="script.js"></script>
-  </body>
+<body>
+  <h1>Dashboard for music nerds 🤓</h1>
+  <h2>Ratings for the albums</h2>
+
+  <p>Tryk på knappen for at sortere</p>
+  <div>
+    <!-- <button id="sortByValue">Efter højeste måleresultat</button>
+    <button id="sortByDate">Efter Produktions år</button>
+    <button id="sortByMeasureTime">Efter hurtigste måletid</button> -->
+    <button onclick="sortByYear()">Sorter efter År</button>
+    <button onclick="change()">Skift Data</button>
+    <label>Sortering:</label>
+    <select>
+      <option>Ingen sortering</option>
+      <option>Ældste til nyeste</option>
+      <option>Nyeste til ældste</option>
+    </select>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+
 </html>
