@@ -1,7 +1,7 @@
 let albumArray = [];
 let ratingArray = [];
 
-fetchContent("/data/albums.json").then((data) => {
+fetchContent("albums.json").then((data) => {
 
 var w = 500;
 var h = 150;
