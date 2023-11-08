@@ -20,6 +20,7 @@ fetchContent("albums.json").then((data) => {
         ratingArray.push(data[i].rating);
     }
 
+    ratingArray.sort(d3.descending);
     console.log(ratingArray);
 
     svg.selectAll("rect")
@@ -73,11 +74,27 @@ d3.select("sortByValue")
 
     });
 
+function changeRatingArray(types) {
+    var types = document.getElementById("mySelect").value;
+    console.log(types);
+    if (types == 1) {
+        ratingArray.sort(d3.descending)
+        console.log(ratingArray)
+        removesvg()
+        buildsvg(ratingArray)
+    }
+    if (types == 2) {
+        ratingArray.sort(d3.ascending)
+        console.log(ratingArray)
+        removesvg()
+        buildsvg(ratingArray)
+    }
+}
 
 /*
 d3.select("sortByValue")
 .on("click", function () {
-
+ 
 })
 //Her tilføjes der eventlisteners til knapperne
 d3.selectAll("#sortByValue, #sortByDate, #sortByMeasureTime").on(
@@ -99,7 +116,7 @@ function (e) {
     animateData(dataset, isFastest);
 }
 )
-
+ 
 function init(dataset, isFastest) {
 //Først skal de dynamiske værdier sættes op
 setUp(dataset, isFastest);
@@ -108,7 +125,7 @@ createDefaultChart(dataset);
 //Akser tilføjes
 addAxes();
 }
-
+ 
 function setUp(dataset, isFastest) {
 //Skaleringsfunktioner
 yScale = createScaleY(dataset);
@@ -172,7 +189,7 @@ svg.selectAll("rect")
   .attr("width", xScale.bandwidth())
   .attr("height", d => height - margin.bottom - yScale(d.fullPlays))
   .attr("fill", "steelblue");
-
+ 
       svg.append("g")
       .attr("class", "y-axis")
       .attr("transform", `translate(${margin.left},0)`)
@@ -244,4 +261,63 @@ async function fetchContent(url) {
     let request = await fetch(url);
     let json = await request.json();
     return json;
+}
+
+function removesvg() {
+    d3.select("svg")
+        .remove()
+};
+
+
+function buildsvg(data) {
+
+    var w = 500;
+    var h = 150;
+    var barPadding = 1;
+
+    var svg = d3.select("body")
+        .append("svg")
+        .attr("width", w)
+        .attr("height", h);
+
+    svg.selectAll("rect")
+        .data(data)
+        .enter()
+        .append("rect")
+        .transition()
+        .duration(2000)
+        .ease(d3.easeBounceOut)
+
+        .attr("x", function (d, i) {
+            return i * (w / data.length);
+        })
+        .attr("y", function (d) {
+            return h - (d * 25);
+        })
+        .attr("width", w / data.length - barPadding)
+        .attr("height", function (d) {
+            return d * 25;
+        })
+        .attr("fill", function (d) {
+            return "rgb(0,0, " + Math.round(d * 25) + ")";
+        });
+
+    svg.selectAll("text")
+        .data(data)
+        .enter()
+        .append("text")
+        .transition()
+        .duration(2000)
+        .ease(d3.easeBounceOut)
+        .text(function (d) {
+            return d;
+        })
+        .attr("x", function (d, i) {
+            return i * (w / data.length) + (w / data.length - barPadding) / 2;
+        })
+        .attr("y", function (d) {
+            return h - (d * 25) + 18;
+        })
+        .attr("fill", "white")
+        .attr("text-anchor", "middle");
 }

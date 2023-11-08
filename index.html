@@ -24,10 +24,9 @@
     <button onclick="sortByYear()">Sorter efter År</button>
     <button onclick="change()">Skift Data</button>
     <label>Sortering:</label>
-    <select>
-      <option>Ingen sortering</option>
-      <option>Ældste til nyeste</option>
-      <option>Nyeste til ældste</option>
+    <select onchange="changeRatingArray(1)" id="mySelect">
+      <option value="1">Oldest to newest</option>
+      <option value="2">Newest to oldest</option>
     </select>
   </div>
 
