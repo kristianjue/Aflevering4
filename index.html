@@ -5,11 +5,7 @@
   <meta charset="UTF-8" />
   <title>Document</title>
   <script src="d3.v7.js"></script>
-  <style>
-    svg {
-      border: 3px solid black;
-    }
-  </style>
+  <link rel="stylesheet" type="text/css" href="style.css" />
 </head>
 
 <body>
@@ -18,15 +14,10 @@
 
   <p>Tryk på knappen for at sortere</p>
   <div>
-    <!-- <button id="sortByValue">Efter højeste måleresultat</button>
-    <button id="sortByDate">Efter Produktions år</button>
-    <button id="sortByMeasureTime">Efter hurtigste måletid</button> -->
-    <button onclick="sortByYear()">Sorter efter År</button>
-    <button onclick="change()">Skift Data</button>
     <label>Sortering:</label>
-    <select onchange="changeRatingArray(1)" id="mySelect">
-      <option value="1">Oldest to newest</option>
-      <option value="2">Newest to oldest</option>
+    <select onchange="changeRatingArray()" id="mySelect">
+      <option value="1">Highest to Lowest</option>
+      <option value="2">Lowest to Highest</option>
     </select>
   </div>
 
