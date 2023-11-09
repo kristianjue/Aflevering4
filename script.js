@@ -3,13 +3,13 @@ function changeRatingArray() {
     var types = document.getElementById("mySelect").value
     console.log(types)
     if (types == 1) {
-        ratingArray.sort(d3.descending);
+        ratingArray.sort((a, b) => d3.descending(a.rating, b.rating));
         console.log(ratingArray);
         removesvg();
         buildsvg(ratingArray);
     }
     else if (types == 2) {
-        ratingArray.sort(d3.ascending);
+        ratingArray.sort((a, b) => d3.ascending(a.rating, b.rating));
         console.log(ratingArray);
         removesvg();
         buildsvg(ratingArray);
@@ -26,7 +26,7 @@ let yearArray = [];
 fetchContent("albums.json").then((data) => {
 
     for (i = 0; i < data.length; i++) {
-        ratingArray.push(data[i].rating);
+        ratingArray.push({ rating: data[i].rating, albumName: data[i].albumName });
     }
 
     changeRatingArray();
@@ -62,14 +62,14 @@ function buildsvg(data) {
             return i * (w / data.length);
         })
         .attr("y", function (d) {
-            return h - (d * 25);
+            return h - (d.rating * 25);
         })
         .attr("width", w / data.length - barPadding)
         .attr("height", function (d) {
-            return d * 25;
+            return d.rating * 25;
         })
         .attr("fill", function (d) {
-            return "rgb(0,0, " + Math.round(d * 25) + ")";
+            return "rgb(0,0, " + Math.round(d.rating * 25) + ")";
         });
 
 
@@ -81,16 +81,39 @@ function buildsvg(data) {
         .duration(2000)
         .ease(d3.easeBounceOut)
         .text(function (d) {
-            return d;
+            return d.rating;
         })
         .attr("x", function (d, i) {
             return i * (w / data.length) + (w / data.length - barPadding) / 2;
         })
         .attr("y", function (d) {
-            return h - (d * 25) + 18;
+            return h - (d.rating * 25) + 18;
         })
         .attr("fill", "white")
         .attr("text-anchor", "middle");
+
+    svg.selectAll(".albumName")
+        .data(data)
+        .enter()
+        .append("text")
+        .transition()
+        .duration(2000)
+        .ease(d3.easeBounceOut)
+        .attr("class", "albumName") // Add a class for styling if needed
+        .text(function (d) {
+            return d.albumName; // Get the album name from the data object
+        })
+        .attr("x", function (d, i) {
+            return i * (w / data.length) + (w / data.length - barPadding) / 2;
+        })
+        .attr("y", function (d) {
+            return h - (d.rating * 25) / 2; // This should be adjusted based on the bar height
+        })
+        .attr("text-anchor", "middle") // Center the text vertically
+        .attr("fill", "white") // Use white text for better contrast
+        .style("font-size", "10px"); // Adjust the font size as needed
+
+
 };
 
 
