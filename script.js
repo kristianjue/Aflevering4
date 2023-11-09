@@ -141,10 +141,6 @@ function buildsvg(data) {
       .style("font-size", "10px");
 */
 
-
-
-
-
 //Magi - det taler vi om senere!!
 async function fetchContent(url) {
     let request = await fetch(url);

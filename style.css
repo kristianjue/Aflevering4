@@ -1,3 +1,60 @@
 svg {
     border: 3px solid black;
 }
+
+svg {
+    border: 3px solid black;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f2f2f2;
+    color: #333;
+    text-align: center;
+    margin: 20px;
+}
+  
+h1 {
+    color: #1a1a1a;
+    font-size: 2em;
+    margin-bottom: 5px;
+}
+  
+h2 {
+    color: #333;
+    font-size: 1.5em;
+    margin-bottom: 10px;
+}
+  
+p {
+    color: #666; /* idk om den skal være mere tydelig i farven */
+}
+  
+div {
+    margin-top: 20px;
+}
+  
+label {
+    font-weight: bold;
+    margin-right: 10px;
+}
+  
+select {
+    padding: 8px;
+    font-size: 1em;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    appearance: none; 
+}
+
+select option {
+    background-color: #fff;
+    color: #333;
+}
+  
+select option:hover {
+    background-color: #f2f2f2;
+}
+  
+  
+  
