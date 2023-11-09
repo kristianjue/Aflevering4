@@ -119,6 +119,28 @@ function buildsvg(data) {
         
 };
 
+/* sandra kode
+  svg.selectAll(".albumName")
+      .data(data)
+      .enter()
+      .append("text")
+      .transition()
+      .duration(2000)
+      .ease(d3.easeBounceOut)
+      .attr("transform", function(d, i){
+          var x = i * (w / data.length) + (w / data.length - barPadding) / 3 + 20;
+          var y = h - (d.rating * 25) / 2 + 2;
+          return "translate(" + x + "," + y + ")rotate(-90)";
+      })
+      .attr("class", "albumName")
+      .text(function (d) {
+        return d.albumName;
+      })
+      .attr("text-anchor", "end")
+      .attr("fill", "white")
+      .style("font-size", "10px");
+*/
+
 
 
 
