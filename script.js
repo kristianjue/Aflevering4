@@ -39,7 +39,7 @@ function removesvg() {
 
 function buildsvg(data) {
 
-    var w = 1000;
+    var w = 1200;
     var h = 200;
     var barPadding = 1;
 
@@ -99,9 +99,9 @@ function buildsvg(data) {
         .duration(2000)
         .ease(d3.easeBounceOut)
         .attr("transform", function(d, i){
-            var y = (i + 1) * 17;
-            var x = (i-20)- 20;
-            return "translate("+x+","+y+"),rotate(345)";
+            var y = (i + 1) * 18;
+            var x = (i-11) - 20;
+            return "translate("+x+","+y+"),rotate(347) ";
         })
         .attr("class", "albumName") // Add a class for styling if needed
         .text(function (d) {
