@@ -6,7 +6,7 @@ function changeRatingArray() {
         ratingArray.sort((a, b) => d3.descending(a.rating, b.rating));
         console.log(ratingArray);
         removesvg();
-        buildsvg(ratingArray);
+        buildsvg(ratingArray)
     }
     else if (types == 2) {
         ratingArray.sort((a, b) => d3.ascending(a.rating, b.rating));
@@ -16,11 +16,9 @@ function changeRatingArray() {
     }
 };
 
-
 let albumArray = [];
 let ratingArray = [];
 let yearArray = [];
-
 
 
 fetchContent("albums.json").then((data) => {
@@ -92,6 +90,7 @@ function buildsvg(data) {
         .attr("fill", "white")
         .attr("text-anchor", "middle");
 
+
     svg.selectAll(".albumName")
         .data(data)
         .enter()
@@ -99,21 +98,25 @@ function buildsvg(data) {
         .transition()
         .duration(2000)
         .ease(d3.easeBounceOut)
+        .attr("transform", function(d, i){
+            var y = (i + 1) * 17;
+            var x = (i-20)- 20;
+            return "translate("+x+","+y+"),rotate(345)";
+        })
         .attr("class", "albumName") // Add a class for styling if needed
         .text(function (d) {
             return d.albumName; // Get the album name from the data object
         })
         .attr("x", function (d, i) {
-            return i * (w / data.length) + (w / data.length - barPadding) / 2;
+            return i * (w / data.length) + (w / data.length - barPadding) / 3 + 20
         })
         .attr("y", function (d) {
-            return h - (d.rating * 25) / 2; // This should be adjusted based on the bar height
+            return h - (d.rating * 25) /2 + 2; // This should be adjusted based on the bar height
         })
         .attr("text-anchor", "middle") // Center the text vertically
         .attr("fill", "white") // Use white text for better contrast
-        .style("font-size", "10px"); // Adjust the font size as needed
-
-
+        .style("font-size", "10px") // Adjust the font size as needed
+        
 };
 
 
