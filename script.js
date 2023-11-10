@@ -42,6 +42,13 @@ function buildsvg(data) {
     var w = 1200;
     var h = 200;
     var barPadding = 1;
+    var maxRating = d3.max(data, function(d) { return d.rating; });
+
+    var yScale = d3.scaleLinear()
+    .domain([0, maxRating])
+    .range([0, h]);
+
+
 
     var svg = d3.select("body")
         .append("svg")
@@ -60,11 +67,11 @@ function buildsvg(data) {
             return i * (w / data.length);
         })
         .attr("y", function (d) {
-            return h - (d.rating * 25);
+            return h - yScale(d.rating);
         })
         .attr("width", w / data.length - barPadding)
         .attr("height", function (d) {
-            return d.rating * 25;
+            return yScale(d.rating);
         })
         .attr("fill", function (d) {
             return "rgb(0,0, " + Math.round(d.rating * 25) + ")";
